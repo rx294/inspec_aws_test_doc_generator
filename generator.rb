@@ -138,8 +138,8 @@ end
 
 doc_template = %q{
 
-  ---
-title: About the <%=elements['resource_name']%> Resource
+---
+title: About the aws_cloudwatch_alarm Resource
 ---
 
 # <%=elements['resource_name']%>
@@ -221,7 +221,6 @@ ADD_DESCRIPTION
 
 test_code = ERB.new(test_template, 0, "%<>").result
 docs = ERB.new(doc_template, 0, "%<>").result
-puts docs
 
 File.open("#{elements['resource_name']}_test.rb", "w+") do |f|
   f.write(test_code)

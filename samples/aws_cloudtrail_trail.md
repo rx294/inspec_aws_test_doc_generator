@@ -1,7 +1,7 @@
 
 
-  ---
-title: About the aws_cloudtrail_trail Resource
+---
+title: About the aws_cloudwatch_alarm Resource
 ---
 
 # aws_cloudtrail_trail
