@@ -1,7 +1,5 @@
-
-
 ---
-title: About the aws_cloudwatch_alarm Resource
+title: About the aws_cloudtrail_trail Resource
 ---
 
 # aws_cloudtrail_trail
@@ -131,5 +129,4 @@ ADD_DESCRIPTION
     describe aws_cloudtrail_trail('test-trail-1') do
       it { should be_log_file_validation_enabled }
     end
-
 

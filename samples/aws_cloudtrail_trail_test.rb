@@ -1,4 +1,3 @@
-
 require 'helper'
 require 'aws_cloudtrail_trail'
 
