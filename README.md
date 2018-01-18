@@ -56,6 +56,9 @@ Files generated
 - resource_name.md
 - resource_name_trail_test.rb
 
+## Notes
+
+Look for `CHANGEME` and `ADD_DESCRIPTION` in the files.
 
 ## Feedback
 
