@@ -18,7 +18,7 @@ ADD_DESCRIPTION
     end
 
     # Hash syntax for CHANGEME name
-    describe <%=elements['resource_name']%>(trail_name: '<%=elements['assert_param']%>') do
+    describe <%=elements['resource_name']%>(<%=elements['param_name']%>: '<%=elements['assert_param']%>') do
       it { should exist }
     end
 
