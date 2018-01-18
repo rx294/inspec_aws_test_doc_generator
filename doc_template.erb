@@ -1,0 +1,78 @@
+---
+title: About the <%=elements['resource_name']%> Resource
+---
+
+# <%=elements['resource_name']%>
+
+ADD_DESCRIPTION
+
+<br>
+
+## Syntax
+
+ADD_DESCRIPTION
+
+    # Find a CHANGEME by name
+    describe <%=elements['resource_name']%>('<%=elements['assert_param']%>') do
+      it { should exist }
+    end
+
+    # Hash syntax for CHANGEME name
+    describe <%=elements['resource_name']%>(trail_name: '<%=elements['assert_param']%>') do
+      it { should exist }
+    end
+
+<br>
+
+## Examples
+
+The following examples show how to use this InSpec audit resource.
+
+### ADD_DESCRIPTION
+
+    describe <%=elements['resource_name']%>('<%=elements['assert_param']%>') do
+      it { should exist }
+    end
+
+### ADD_DESCRIPTION
+
+    describe <%=elements['resource_name']%>('<%=elements['assert_param']%>') do
+      it { should CHANGEME }
+    end
+
+### ADD_DESCRIPTION
+
+    describe <%=elements['resource_name']%>('<%=elements['assert_param']%>') do
+      it { should CHANGEME }
+    end
+
+<br>
+
+## Properties
+
+<% elements['properties'].each do |property| %>
+### <%=property%>
+
+ADD_DESCRIPTION
+
+    describe <%=elements['resource_name']%>('<%=elements['assert_param']%>') do
+      its('<%=property%>') { should cmp "CHANGEME" }
+    end
+
+<% end %>
+
+## Matchers
+
+This InSpec audit resource has the following special matchers. For a full list of available matchers (such as `exist`) please visit our [matchers page](https://www.inspec.io/docs/reference/matchers/).
+
+<% elements['matchers'].each do |matcher| %>
+
+### be_<%=matcher%>
+
+ADD_DESCRIPTION
+
+    describe <%=elements['resource_name']%>('<%=elements['assert_param']%>') do
+      it { should be_<%=matcher%> }
+    end
+
+<% end %>
