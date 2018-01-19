@@ -9,21 +9,25 @@ VARS_YAML = 'vars.yml'
 DOC_TEMPLATE = 'doc_template.erb'
 TEST_TEMPLATE = 'test_template.erb'
 
-elements = YAML.load_file(VARS_YAML)
+vars = YAML.load_file(VARS_YAML)
 
 def extract_upper_case_letters(string)
   string.scan /\p{Upper}/
 end
 
-mock_class_name = "M#{extract_upper_case_letters( elements['class_name']).join}SB"
+if vars['singular']
+	mock_class_name = "M#{extract_upper_case_letters( vars['class_name']).join}SB"
+else
+	mock_class_name = "M#{extract_upper_case_letters( vars['class_name']).join}PB"
+end
 
 test_code = ERB.new(File.open(TEST_TEMPLATE, "r").read, 0, "%<>").result
 docs = ERB.new(File.open(DOC_TEMPLATE, "r").read, 0, "%<>").result
 
-File.open("#{elements['resource_name']}_test.rb", "w+") do |f|
+File.open("#{vars['resource_name']}_test.rb", "w+") do |f|
   f.write(test_code)
 end
 
-File.open("#{elements['resource_name']}.md", "w+") do |f|
+File.open("#{vars['resource_name']}.md", "w+") do |f|
   f.write(docs)
 end

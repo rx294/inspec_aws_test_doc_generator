@@ -1,66 +1,66 @@
 require 'helper'
-require '<%= elements['resource_name'] %>'
+require '<%= vars['resource_name'] %>'
 
-# <%= mock_class_name %> = Mock<%= elements['class_name'] %>Backend
+# <%= mock_class_name %> = Mock<%= vars['class_name'] %><%= vars['singular'] ? 'Singular' : 'Plural' %>Backend
 # Abbreviation not used outside this file
 
 #=============================================================================#
 #                            Constructor Tests
 #=============================================================================#
-class <%= elements['class_name'] %>ConstructorTest < Minitest::Test
+class <%= vars['class_name'] %>ConstructorTest < Minitest::Test
 
   def setup
-    <%= elements['class_name'] %>::BackendFactory.select(<%= mock_class_name %>::Empty)
+    <%= vars['class_name'] %>::BackendFactory.select(<%= mock_class_name %>::Empty)
   end
-  <% if elements['empty_param_ok'] %>
+  <% if vars['empty_param_ok'] %>
   def test_accepts_empty_params
-    <%=elements['class_name']%>.new
+    <%=vars['class_name']%>.new
   end
   <% else %>
   def test_rejects_empty_params
-    assert_raises(ArgumentError) { <%=elements['class_name']%>.new }
+    assert_raises(ArgumentError) { <%=vars['class_name']%>.new }
   end
   <% end %>
-  <% if elements['scalar_param_ok'] %>
-  def test_accepts_<%=elements['param_name'] %>_as_scalar
-    <%=elements['class_name']%>.new('<%=elements['assert_param'] %>')
+  <% if vars['scalar_param_ok'] %>
+  def test_accepts_<%=vars['param_name'] %>_as_scalar
+    <%=vars['class_name']%>.new('<%=vars['assert_param'] %>')
   end
   <% else %>
   def test_rejects_empty_params
-    assert_raises(ArgumentError) { <%=elements['class_name']%>.new('_<%=elements['assert_param'] %>') }
+    assert_raises(ArgumentError) { <%=vars['class_name']%>.new('_<%=vars['assert_param'] %>') }
   end
   <% end %>
-  <% if elements['param_name'] %>
-  def test_accepts_<%=elements['param_name'] %>_as_hash
-    <%=elements['class_name']%>.new(<%=elements['param_name'] %>: '<%=elements['assert_param'] %>')
+  <% if vars['param_name'] %>
+  def test_accepts_<%=vars['param_name'] %>_as_hash
+    <%=vars['class_name']%>.new(<%=vars['param_name'] %>: '<%=vars['assert_param'] %>')
   end
   <% end %>
   def test_rejects_unrecognized_params
-    assert_raises(ArgumentError) { <%=elements['class_name']%>.new(invalid: 9) }
+    assert_raises(ArgumentError) { <%=vars['class_name']%>.new(invalid: 9) }
   end
 end
 
 #=============================================================================#
 #                               Search / Recall
 #=============================================================================#
-class <%=elements['class_name']%>RecallTest < Minitest::Test
+class <%=vars['class_name']%>RecallTest < Minitest::Test
 
   def setup
-    <%=elements['class_name']%>::BackendFactory.select(<%= mock_class_name %>::Basic)
+    <%=vars['class_name']%>::BackendFactory.select(<%= mock_class_name %>::Basic)
   end
-  <% if elements['scalar_param_ok'] %>
+  <% if vars['scalar_param_ok'] %>
   def test_search_hit_via_scalar_works
-    assert <%=elements['class_name']%>.new('<%=elements['assert_param']%>').exists?
+    assert <%=vars['class_name']%>.new('<%=vars['assert_param']%>').exists?
   end
   <% end %>
-  <% if elements['param_name'] %>
+  <% if vars['param_name'] %>
   def test_search_hit_via_hash_works
-    assert <%=elements['class_name']%>.new(<%=elements['param_name']%>: '<%=elements['assert_param']%>').exists?
+    assert <%=vars['class_name']%>.new(<%=vars['param_name']%>: '<%=vars['assert_param']%>').exists?
   end
   <% end %>
-  <% if elements['param_name'] %>
+  <% if vars['param_name'] %>
   def test_search_miss_is_not_an_exception
-    refute <%=elements['class_name']%>.new(<%=elements['param_name']%>: 'non-existant').exists?
+    refute <%=vars['class_name']%>.new(<%=vars['param_name']%>: 'non-existant').exists?
   end
   <% end %>
 end
@@ -68,16 +68,16 @@ end
 #=============================================================================#
 #                               Properties
 #=============================================================================#
-class <%=elements['class_name']%>PropertiesTest < Minitest::Test
+class <%=vars['class_name']%>PropertiesTest < Minitest::Test
 
   def setup
-    <%=elements['class_name']%>::BackendFactory.select(<%= mock_class_name %>::Basic)
+    <%=vars['class_name']%>::BackendFactory.select(<%= mock_class_name %>::Basic)
   end
 
-  <% elements['properties'].each do |property| %>
+  <% vars['properties'].each do |property| %>
   def test_property_<%=property%>
-    assert_equal('CHANGE_ME', <%=elements['class_name']%>.new('<%=elements['assert_param']%>').<%=property%>)
-    assert_nil(<%=elements['class_name']%>.new(<%=elements['param_name']%>: 'non-existant').<%=property%>)
+    assert_equal('CHANGE_ME', <%=vars['class_name']%>.new('<%=vars['assert_param']%>').<%=property%>)
+    assert_nil(<%=vars['class_name']%>.new(<%=vars['param_name']%>: 'non-existant').<%=property%>)
   end
   <% end %>
 end
@@ -86,18 +86,18 @@ end
 #=============================================================================#
 #                               Matchers
 #=============================================================================#
-class <%=elements['class_name']%>MatchersTest < Minitest::Test
+class <%=vars['class_name']%>MatchersTest < Minitest::Test
 
   def setup
-    <%=elements['class_name']%>::BackendFactory.select(<%= mock_class_name %>::Basic)
+    <%=vars['class_name']%>::BackendFactory.select(<%= mock_class_name %>::Basic)
   end
-  <% elements['matchers'].each do |matcher| %>
+  <% vars['matchers'].each do |matcher| %>
   def test_matcher_<%=matcher%>_positive
-    assert <%=elements['class_name']%>.new('<%=elements['assert_param']%>').<%=matcher%>?
+    assert <%=vars['class_name']%>.new('<%=vars['assert_param']%>').<%=matcher%>?
   end
 
   def test_matcher_<%=matcher%>_negative
-    refute <%=elements['class_name']%>.new('<%=elements['refute_param']%>').<%=matcher%>?
+    refute <%=vars['class_name']%>.new('<%=vars['refute_param']%>').<%=matcher%>?
   end
   <% end %>
 end
@@ -107,13 +107,13 @@ end
 #                               Test Fixtures
 #=============================================================================#
 module <%= mock_class_name %>
-  class Empty < <%=elements['class_name']%>::Backend
+  class Empty < <%=vars['class_name']%>::Backend
     def CHANGE_ME(query)
       OpenStruct.new(CHANGE_ME: [])
     end
   end
 
-  class Basic < <%=elements['class_name']%>::Backend
+  class Basic < <%=vars['class_name']%>::Backend
     def CHANGE_ME(query)
       fixtures = [
       ]

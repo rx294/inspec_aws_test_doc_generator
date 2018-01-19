@@ -1,6 +1,10 @@
 resource_name: "aws_cloudtrail_trail"
 class_name: "AwsCloudTrailTrail"
 
+# True if the resource looks are singular element like aws_cloudtrail_trail
+# False if the resource looks are multiple elements like aws_cloudtrail_trails
+singular: true
+
 # true if empty params are ok
 empty_param_ok: false
 
